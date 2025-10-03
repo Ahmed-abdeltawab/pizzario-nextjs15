@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
+import { ThemeProvider } from "@/contexts/theme-provider";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -20,10 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={roboto.className + " container mx-auto"}>
-        <Header />
-        {children}
+        <ThemeProvider defaultTheme="light" storageKey="pizzario-theme">
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import LoginButton from "./login-button";
 import LangSwitcher from "./lang-switcher";
 import CartButton from "./cart-button";
+import ThemeToggle from "./theme-toggle";
 import { Menu, X } from "lucide-react";
 
 const Header = () => {
@@ -51,6 +52,7 @@ const Header = () => {
           <div className="hidden md:flex items-center gap-6 lg:gap-8">
             <Navbar />
             <div className="flex items-center gap-3 lg:gap-4">
+              <ThemeToggle />
               <LangSwitcher />
               <CartButton />
               <LoginButton />
@@ -85,6 +87,7 @@ const Header = () => {
           <div className="py-4 space-y-4 border-t">
             <Navbar isMobile onLinkClick={() => setIsMobileMenuOpen(false)} />
             <div className="flex flex-col gap-3 pt-4 border-t">
+              <ThemeToggle />
               <LangSwitcher />
               <LoginButton />
             </div>
