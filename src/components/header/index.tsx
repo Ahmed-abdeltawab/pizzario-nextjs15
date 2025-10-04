@@ -39,9 +39,9 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 sm:h-20 items-center justify-between">
+        <div className="flex h-16 sm:h-20 items-center justify-between gap-2 md:gap-4">
           {/* Logo */}
-          <div className="logo flex items-center gap-2">
+          <div className="logo flex items-center gap-2 flex-shrink-0">
             <span className="text-3xl sm:text-4xl">🍕</span>
             <span className="text-xl sm:text-2xl font-bold text-primary">
               Pizzario
@@ -49,9 +49,9 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+          <div className="hidden md:flex items-center gap-2 md:gap-3 lg:gap-8 flex-1 justify-end">
             <Navbar />
-            <div className="flex items-center gap-3 lg:gap-4">
+            <div className="flex items-center gap-1.5 md:gap-2 lg:gap-4 flex-shrink-0">
               <ThemeToggle />
               <LangSwitcher />
               <CartButton />

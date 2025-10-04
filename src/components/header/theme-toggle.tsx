@@ -11,7 +11,8 @@ const ThemeToggle = () => {
     <button
       onClick={toggleTheme}
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
-      className="relative inline-flex items-center justify-center w-14 h-8 rounded-full
+      className="relative inline-flex items-center justify-center 
+        w-12 h-7 md:w-14 md:h-8 rounded-full
         bg-gradient-to-r from-amber-200 to-amber-300 dark:from-indigo-500 dark:to-purple-600
         hover:shadow-lg hover:scale-105 active:scale-95
         transition-all duration-300 ease-in-out
@@ -24,14 +25,14 @@ const ThemeToggle = () => {
       
       {/* Toggle Circle */}
       <div
-        className={`absolute w-6 h-6 rounded-full bg-white dark:bg-slate-900
+        className={`absolute w-5 h-5 md:w-6 md:h-6 rounded-full bg-white dark:bg-slate-900
           shadow-lg transition-all duration-300 ease-in-out z-10
           flex items-center justify-center
-          ${theme === 'light' ? 'translate-x-[-10px]' : 'translate-x-[10px]'}`}
+          ${theme === 'light' ? 'translate-x-[-8px] md:translate-x-[-10px]' : 'translate-x-[8px] md:translate-x-[10px]'}`}
       >
         {/* Sun Icon */}
         <Sun
-          className={`absolute w-4 h-4 text-amber-500 transition-all duration-300
+          className={`absolute w-3 h-3 md:w-4 md:h-4 text-amber-500 transition-all duration-300
             ${theme === 'light' 
               ? 'opacity-100 rotate-0 scale-100' 
               : 'opacity-0 rotate-90 scale-0'
@@ -41,7 +42,7 @@ const ThemeToggle = () => {
         
         {/* Moon Icon */}
         <Moon
-          className={`absolute w-4 h-4 text-indigo-400 transition-all duration-300
+          className={`absolute w-3 h-3 md:w-4 md:h-4 text-indigo-400 transition-all duration-300
             ${theme === 'dark' 
               ? 'opacity-100 rotate-0 scale-100' 
               : 'opacity-0 rotate-90 scale-0'
@@ -53,8 +54,8 @@ const ThemeToggle = () => {
       {/* Decorative Stars (visible in dark mode) */}
       <div className={`absolute inset-0 transition-opacity duration-300 ${theme === 'dark' ? 'opacity-100' : 'opacity-0'}`}>
         <div className="absolute top-1 left-2 w-1 h-1 bg-white rounded-full animate-pulse" />
-        <div className="absolute top-3 right-3 w-1 h-1 bg-white rounded-full animate-pulse delay-150" />
-        <div className="absolute bottom-2 left-3 w-0.5 h-0.5 bg-white rounded-full animate-pulse delay-300" />
+        <div className="absolute top-2 md:top-3 right-2 md:right-3 w-1 h-1 bg-white rounded-full animate-pulse delay-150" />
+        <div className="absolute bottom-1 md:bottom-2 left-2 md:left-3 w-0.5 h-0.5 bg-white rounded-full animate-pulse delay-300" />
       </div>
     </button>
   )

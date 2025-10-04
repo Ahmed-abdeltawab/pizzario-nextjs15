@@ -20,12 +20,15 @@ const LangSwitcher = () => {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Change language"
         aria-expanded={isOpen}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border
+        className="inline-flex items-center gap-1.5 md:gap-2 
+          px-2.5 md:px-3 lg:px-4 py-2 rounded-lg border
+          text-sm md:text-base
           hover:bg-accent/10 hover:border-primary/50
           active:scale-95 transition-all duration-200 ease-in-out
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
+          whitespace-nowrap"
       >
-        <Globe className="w-4 h-4" strokeWidth={2} />
+        <Globe className="w-3.5 h-3.5 md:w-4 md:h-4" strokeWidth={2} />
         <span className="text-sm font-medium hidden sm:inline">
           {currentLanguage?.nativeName}
         </span>

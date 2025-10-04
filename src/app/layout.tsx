@@ -3,7 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/contexts/theme-provider";
-
+import ReduxProvider from "@/providers/ReduxProvider";
 const roboto = Roboto({
   subsets: ["latin"],
   preload: true,
@@ -23,10 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={roboto.className + " container mx-auto"}>
-        <ThemeProvider defaultTheme="light" storageKey="pizzario-theme">
-          <Header />
-          {children}
-        </ThemeProvider>
+        <ReduxProvider>
+          <ThemeProvider defaultTheme="light" storageKey="pizzario-theme">
+            <Header />
+            {children}
+          </ThemeProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

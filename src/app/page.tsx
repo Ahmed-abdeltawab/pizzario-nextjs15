@@ -1,22 +1,24 @@
-
-import React from 'react';
+import React from "react";
 import {
   HeroSection,
-  FeaturedMenu,
   WhyChooseUs,
   Testimonials,
-  ContactLocation
-} from '@/components/home';
+  ContactLocation,
+} from "@/components/home";
+import BestSellers from "@/components/home/BestSellers/BestSellers";
 
-export default function Home() {
+import { getBestSellingProducts } from "@/server/db/products";
+
+export default async function Home() {
+  const bestSellersProducts = await getBestSellingProducts(3);
+  console.log("Best Sellers Products:", bestSellersProducts);
   return (
     <main className="min-h-screen">
       <HeroSection />
-      <FeaturedMenu />
+      <BestSellers products={bestSellersProducts} />
       <WhyChooseUs />
       <Testimonials />
       <ContactLocation />
-
     </main>
   );
 }

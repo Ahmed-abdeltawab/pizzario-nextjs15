@@ -38,7 +38,7 @@ const Navbar = ({ isMobile = false, onLinkClick }: NavbarProps) => {
   return (
     <nav
       aria-label="Main navigation"
-      className={isMobile ? "flex flex-col gap-1" : "flex flex-row items-center gap-1 lg:gap-2"}
+      className={isMobile ? "flex flex-col gap-1" : "flex flex-row items-center gap-0.5 md:gap-1 lg:gap-2"}
     >
       {links.map((link) => {
         const isActive =
@@ -52,7 +52,8 @@ const Navbar = ({ isMobile = false, onLinkClick }: NavbarProps) => {
             aria-current={isActive ? "page" : undefined}
             onClick={onLinkClick}
             className={`
-              relative px-4 py-2 rounded-lg font-medium text-base
+              relative px-2 md:px-3 lg:px-4 py-2 rounded-lg font-medium 
+              text-sm md:text-base
               transition-all duration-200 ease-in-out
               ${isActive 
                 ? 'text-primary bg-primary/10' 
