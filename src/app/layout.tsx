@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/contexts/theme-provider";
 import ReduxProvider from "@/providers/ReduxProvider";
+
 const roboto = Roboto({
   subsets: ["latin"],
   preload: true,

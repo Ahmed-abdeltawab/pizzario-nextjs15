@@ -1,23 +1,26 @@
 ﻿"use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { X, Plus, Minus, ShoppingCart, Trash2 } from "lucide-react";
 import { Extra, Size } from "@prisma/client";
 import { ProductWithRelations } from "@/types";
 import SizeSelector from "./SizeSelector";
 import ExtrasSelector from "./ExtrasSelector";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { addItem } from "@/redux/fearures/cart/cartSlice";
+import { generateUniqueKey } from "@/utils/cartHelpers";
 
 interface ProductModalProps {
   product: ProductWithRelations;
   isOpen: boolean;
   onClose: () => void;
-  onAddToCart: (
-    product: ProductWithRelations,
-    selectedSize: Size | null,
-    selectedExtras: Extra[],
-    quantity: number
-  ) => void;
+  // onAddToCart: (
+  //   product: ProductWithRelations,
+  //   selectedSize: Size | null,
+  //   selectedExtras: Extra[],
+  //   quantity: number
+  // ) => void;
   isInCart?: boolean;
   currentQuantity?: number;
   onUpdateQuantity?: (quantity: number) => void;
@@ -28,19 +31,26 @@ const ProductModal: React.FC<ProductModalProps> = ({
   product,
   isOpen,
   onClose,
-  onAddToCart,
+  // onAddToCart,
   isInCart = false,
   currentQuantity = 0,
   onUpdateQuantity,
   onRemoveFromCart,
 }) => {
-  const [selectedSize, setSelectedSize] = useState<Size | null>(null);
+  const cart = useAppSelector((state) => state.cart);
+  const defaultSize =
+    cart.items.find((item) => item.id === product.id)?.selectedSize ||
+    product.sizes.find((size) => size.name === "SMALL");
+  console.log("cart :", cart);
+  console.log("selected Product :", product);
+  const [selectedSize, setSelectedSize] = useState<Size>(defaultSize!);
   const [selectedExtras, setSelectedExtras] = useState<Extra[]>([]);
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useAppDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isOpen) {
-      setSelectedSize(null);
+      setSelectedSize(defaultSize!);
       setSelectedExtras([]);
       setQuantity(isInCart ? currentQuantity : 1);
     }
@@ -74,7 +84,20 @@ const ProductModal: React.FC<ProductModalProps> = ({
   };
 
   const handleAddToCart = () => {
-    onAddToCart(product, selectedSize, selectedExtras, quantity);
+    // dispatch(addItem({ ...product, selectedSize, selectedExtras, quantity }));
+    dispatch(
+      addItem({
+        uniqueKey: generateUniqueKey(product.id, selectedSize, selectedExtras),
+        id: product.id,
+        name: product.name,
+        image: product.image,
+        price: product.price,
+        quantity,
+        description: product.description,
+        selectedSize,
+        selectedExtras,
+      })
+    );
     onClose();
   };
 
@@ -170,7 +193,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                   <span>Add to Cart</span>
                 </div>
                 <span className="text-[1.3em] font-extrabold">
-                  ${calculateTotal().toFixed(2)}
+                  {`${calculateTotal().toFixed(2)}`}
                 </span>
               </button>
             ) : (

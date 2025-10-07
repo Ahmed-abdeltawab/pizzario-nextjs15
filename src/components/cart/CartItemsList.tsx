@@ -15,7 +15,7 @@ const CartItemsList: React.FC<CartItemsListProps> = ({ items }) => {
       
       <div className="space-y-[1.25em]">
         {items.map((item) => (
-          <CartItemCard key={item.id} item={item} />
+          <CartItemCard key={item.uniqueKey} item={item} />
         ))}
       </div>
     </div>

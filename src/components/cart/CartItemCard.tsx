@@ -1,13 +1,19 @@
 import React from "react";
 import Image from "next/image";
 import { Plus, Minus, Trash2 } from "lucide-react";
-import { CartItem } from "@/redux/fearures/cart/cartSlice";
+import {
+  CartItem,
+  removeItem,
+  updateQuantity,
+} from "@/redux/fearures/cart/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
 
 interface CartItemCardProps {
   item: CartItem;
 }
 
 const CartItemCard: React.FC<CartItemCardProps> = ({ item }) => {
+  const dispatch = useAppDispatch();
   return (
     <div
       className="bg-card rounded-[1.25em] p-[1.5em] border-[1px] border-border shadow-sm hover:shadow-md transition-shadow"
@@ -42,17 +48,18 @@ const CartItemCard: React.FC<CartItemCardProps> = ({ item }) => {
             <p className="text-[0.95em] text-muted-foreground mb-[0.75em] line-clamp-2">
               {item.description}
             </p>
-            
+
             {/* Size and Extras */}
             <div className="flex flex-wrap gap-[0.5em] mb-[1em]">
-              {item.size && (
+              {item.selectedSize && (
                 <span className="px-[0.75em] py-[0.35em] bg-orange-100 dark:bg-orange-950/30 text-orange-700 dark:text-orange-400 rounded-[0.5em] text-[0.85em] font-semibold">
-                  Size: {item.size}
+                  Size: {item.selectedSize.name}
                 </span>
               )}
-              {item.extras && item.extras.length > 0 && (
+              {item.selectedExtras && item.selectedExtras.length > 0 && (
                 <span className="px-[0.75em] py-[0.35em] bg-blue-100 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 rounded-[0.5em] text-[0.85em] font-semibold">
-                  +{item.extras.length} Extra{item.extras.length > 1 ? "s" : ""}
+                  +{item.selectedExtras.length} Extra
+                  {item.selectedExtras.length > 1 ? "s" : ""}
                 </span>
               )}
             </div>
@@ -74,19 +81,47 @@ const CartItemCard: React.FC<CartItemCardProps> = ({ item }) => {
                 <button
                   className="w-[2em] h-[2em] rounded-[0.5em] bg-white dark:bg-gray-800 border-[1px] border-gray-300 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 flex items-center justify-center transition-all active:scale-95"
                   aria-label="Decrease quantity"
+                  onClick={() => {
+                    if (item.quantity > 1) {
+                      dispatch(
+                        updateQuantity({
+                          uniqueKey: item.uniqueKey,
+                          quantity: item.quantity - 1,
+                        })
+                      );
+                    } else {
+                      confirm(
+                        "Are you sure you want to remove this item from the cart?"
+                      ) && dispatch(removeItem(item.uniqueKey));
+                    }
+                  }}
                 >
-                  <Minus className="w-[1em] h-[1em] text-gray-700 dark:text-gray-300" strokeWidth={2.5} />
+                  <Minus
+                    className="w-[1em] h-[1em] text-gray-700 dark:text-gray-300"
+                    strokeWidth={2.5}
+                  />
                 </button>
-                
+
                 <span className="text-[1.1em] font-bold text-foreground min-w-[2em] text-center">
                   {item.quantity}
                 </span>
-                
+
                 <button
                   className="w-[2em] h-[2em] rounded-[0.5em] bg-orange-500 hover:bg-orange-600 flex items-center justify-center transition-all active:scale-95"
                   aria-label="Increase quantity"
+                  onClick={() =>
+                    dispatch(
+                      updateQuantity({
+                        uniqueKey: item.uniqueKey,
+                        quantity: item.quantity + 1,
+                      })
+                    )
+                  }
                 >
-                  <Plus className="w-[1em] h-[1em] text-white" strokeWidth={2.5} />
+                  <Plus
+                    className="w-[1em] h-[1em] text-white"
+                    strokeWidth={2.5}
+                  />
                 </button>
               </div>
             </div>
@@ -95,9 +130,14 @@ const CartItemCard: React.FC<CartItemCardProps> = ({ item }) => {
             <button
               className="flex items-center gap-[0.5em] px-[1em] py-[0.5em] text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-[0.5em] transition-all active:scale-95"
               aria-label="Remove item"
+              onClick={() => {
+                dispatch(removeItem(item.uniqueKey));
+              }}
             >
               <Trash2 className="w-[1.1em] h-[1.1em]" strokeWidth={2} />
-              <span className="text-[0.9em] font-semibold hidden sm:inline">Remove</span>
+              <span className="text-[0.9em] font-semibold hidden sm:inline">
+                Remove
+              </span>
             </button>
           </div>
         </div>

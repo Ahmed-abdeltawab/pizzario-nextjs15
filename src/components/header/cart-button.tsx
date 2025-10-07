@@ -1,9 +1,10 @@
+import { useAppSelector } from "@/redux/hooks";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
 const CartButton = () => {
-  const count = 3;
+  const count = useAppSelector((state) => state.cart.items).length;
 
   return (
     <Link
@@ -14,8 +15,8 @@ const CartButton = () => {
         hover:bg-accent/10 active:scale-95
         transition-all duration-200 ease-in-out group"
     >
-      <ShoppingCart 
-        className="w-5 h-5 md:w-6 md:h-6 text-foreground group-hover:text-primary transition-colors" 
+      <ShoppingCart
+        className="w-5 h-5 md:w-6 md:h-6 text-foreground group-hover:text-primary transition-colors"
         strokeWidth={2}
       />
       {count > 0 && (
@@ -29,7 +30,7 @@ const CartButton = () => {
             animate-in zoom-in-50 duration-200"
           aria-live="polite"
         >
-          {count > 99 ? '99+' : count}
+          {count > 99 ? "99+" : count}
         </span>
       )}
     </Link>

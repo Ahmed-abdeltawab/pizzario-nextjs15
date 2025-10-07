@@ -11,46 +11,10 @@ import {
 import { selectCartItems } from "@/redux/fearures/cart/cartSlice";
 import { useAppSelector } from "@/redux/hooks";
 
-// Mock cart items data (UI only - no real logic)
-const mockCartItems = [
-  {
-    id: "1",
-    name: "Margherita Pizza",
-    description: "Classic Italian pizza with fresh mozzarella and basil",
-    price: 12.99,
-    quantity: 2,
-    image:
-      "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=300&fit=crop",
-    size: "Large",
-    extras: ["Extra Cheese", "Olives"],
-  },
-  {
-    id: "2",
-    name: "Cheeseburger",
-    description: "Juicy beef patty with melted cheese and fresh vegetables",
-    price: 8.99,
-    quantity: 1,
-    image:
-      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
-    size: "Medium",
-    extras: ["Bacon", "Pickles"],
-  },
-  {
-    id: "3",
-    name: "Caesar Salad",
-    description: "Fresh romaine lettuce with creamy Caesar dressing",
-    price: 7.49,
-    quantity: 1,
-    image:
-      "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop",
-    size: "Regular",
-    extras: ["Grilled Chicken"],
-  },
-];
-
 export default function CartPage() {
   // Mock state for demo purposes (UI only)
   const cartItems = useAppSelector(selectCartItems);
+
   const isEmpty = cartItems.length === 0;
 
   // Calculate totals (UI only - mock calculations)

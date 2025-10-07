@@ -7,7 +7,7 @@ export const getBestSellingProducts = cache(
       orderBy: { orders: { _count: "desc" } },
       take: limit,
       include: { sizes: true, extras: true },
-        where: { orders: { some: {} } },
+      // where: { orders: { some: {} } },
     });
     return bestsellers;
   },

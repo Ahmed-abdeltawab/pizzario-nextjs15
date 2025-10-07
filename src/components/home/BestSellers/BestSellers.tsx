@@ -5,6 +5,8 @@ import ProductComp from "../../shared/Product";
 import Heading from "./Heading";
 import { Product } from "@prisma/client";
 import { ProductWithRelations } from "@/types";
+import { useAppDispatch } from "@/redux/hooks";
+import { addItem } from "@/redux/fearures/cart/cartSlice";
 
 interface BestSellersProps {
   products: Product[];
@@ -13,15 +15,11 @@ const BestSellers = ({ products }: BestSellersProps) => {
   const [selectedProduct, setSelectedProduct] =
     useState<ProductWithRelations | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleAddToCart = (product: Product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
-  };
-
-  const handleModalAddToCart = () => {
-    setIsModalOpen(false);
-    setSelectedProduct(null);
   };
 
   return (
@@ -56,7 +54,7 @@ const BestSellers = ({ products }: BestSellersProps) => {
               setIsModalOpen(false);
               setSelectedProduct(null);
             }}
-            onAddToCart={handleModalAddToCart}
+            
           />
         )}
       </div>
