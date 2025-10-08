@@ -30,7 +30,12 @@ const ContactLocation = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-primary/5 to-orange-50">
+    <section className="py-20 px-4 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-orange-300/20 rounded-full blur-3xl"></div>
+      </div>
+      
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
@@ -45,7 +50,7 @@ const ContactLocation = () => {
             {/* Contact Cards */}
             <div className="space-y-6 mb-8">
               {contactInfo.map((info, index) => (
-                <div key={index} className="bg-card rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
+                <div key={index} className="glass-card rounded-lg p-6 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300">
                   <div className="flex items-start gap-4">
                     <div className="text-3xl flex-shrink-0">
                       {info.icon}
@@ -69,18 +74,18 @@ const ContactLocation = () => {
             </div>
 
             {/* Call to Action */}
-            <div className="bg-primary text-primary-foreground rounded-lg p-6">
-              <h3 className="font-bold mb-2">Ready to Order?</h3>
-              <p className="text-sm mb-4 opacity-90">
+            <div className="glass-card rounded-lg p-6 bg-gradient-to-br from-primary/20 to-orange-500/20 border-2 border-primary/30">
+              <h3 className="font-bold mb-2 text-foreground">Ready to Order?</h3>
+              <p className="text-sm mb-4 text-muted-foreground">
                 Call us now or browse our menu online for quick and easy ordering.
               </p>
-              <div className="flex gap-3">
-                <button className="bg-white text-primary px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+              <div className="flex gap-3 flex-wrap">
+                <button className="glass-button px-6 py-2 rounded-lg font-medium hover:scale-105 transition-all duration-300 border-2 border-primary text-primary">
                   Call (555) 123-PIZZA
                 </button>
                 <Link 
                   href="/menu"
-                  className="border border-white text-white px-6 py-2 rounded-lg font-medium hover:bg-white hover:text-primary transition-colors"
+                  className="glass-button px-6 py-2 rounded-lg font-medium hover:scale-105 transition-all duration-300 border-2 border-primary text-primary"
                 >
                   Order Online
                 </Link>
@@ -91,7 +96,7 @@ const ContactLocation = () => {
           {/* Hours & Location */}
           <div>
             {/* Opening Hours */}
-            <div className="bg-card rounded-lg p-6 shadow-md mb-6">
+            <div className="glass-card rounded-lg p-6 shadow-md mb-6">
               <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
                 <span className="text-2xl">🕒</span>
                 Opening Hours

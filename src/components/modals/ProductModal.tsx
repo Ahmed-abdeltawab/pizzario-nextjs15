@@ -112,27 +112,27 @@ const ProductModal: React.FC<ProductModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-[1em] bg-black/60 backdrop-blur-sm animate-fadeIn"
+      className="fixed inset-0 z-50 flex items-center justify-center p-[1em] bg-black/70 backdrop-blur-md animate-fadeIn"
       onClick={onClose}
     >
       <div
-        className="relative bg-card rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden animate-slideUp"
+        className="relative glass-modal rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden animate-slideUp border-2 border-white/20"
         onClick={(e) => e.stopPropagation()}
         style={{ fontSize: "1rem" }}
       >
         <button
           onClick={onClose}
-          className="absolute top-[1em] right-[1em] z-20 w-[2.5em] h-[2.5em] bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-gray-900 hover:scale-110 transition-all shadow-lg group"
+          className="absolute top-[1em] right-[1em] z-20 w-[2.5em] h-[2.5em] glass-button rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-xl group"
           aria-label="Close modal"
         >
-          <X className="w-[1.25em] h-[1.25em] text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors" />
+          <X className="w-[1.25em] h-[1.25em] text-foreground group-hover:text-primary transition-colors" />
         </button>
         <div className="overflow-y-auto max-h-[90vh] scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent">
-          <div className="flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 p-[3em] pt-[4em]">
+          <div className="flex items-center justify-center bg-gradient-to-br from-primary/10 to-orange-200/30 p-[3em] pt-[4em]">
             <div className="relative w-full max-w-[18em] aspect-square">
               {product.image.startsWith("http") ||
               product.image.startsWith("/") ? (
-                <div className="relative w-full h-full rounded-2xl overflow-hidden bg-white dark:bg-white/95 shadow-xl">
+                <div className="relative w-full h-full rounded-2xl overflow-hidden glass shadow-2xl">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -143,16 +143,16 @@ const ProductModal: React.FC<ProductModalProps> = ({
                   />
                 </div>
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-white dark:bg-white/95 rounded-2xl shadow-xl">
-                  <span className="text-[8em] filter drop-shadow-lg">
+                <div className="w-full h-full flex items-center justify-center glass-card rounded-2xl shadow-2xl hover:scale-110 transition-transform duration-300">
+                  <span className="text-[8em] filter drop-shadow-2xl">
                     {product.image}
                   </span>
                 </div>
               )}
             </div>
           </div>
-          <div className="text-center px-[2em] pt-[2em] pb-[1.5em] border-b border-border">
-            <h2 className="text-[2em] font-bold text-foreground mb-[0.75em] leading-tight">
+          <div className="text-center px-[2em] pt-[2em] pb-[1.5em] border-b border-white/20">
+            <h2 className="text-[2em] font-bold text-foreground mb-[0.75em] leading-tight drop-shadow-md">
               {product.name}
             </h2>
             <p className="text-[1em] text-muted-foreground leading-relaxed max-w-[90%] mx-auto">
@@ -176,14 +176,14 @@ const ProductModal: React.FC<ProductModalProps> = ({
               />
             )}
           </div>
-          <div className="px-[2em] pb-[2em] pt-[1em] border-t border-border">
+          <div className="px-[2em] pb-[2em] pt-[1em] border-t border-white/20">
             {!isInCart ? (
               <button
                 onClick={handleAddToCart}
                 disabled={
                   product.sizes && product.sizes.length > 0 && !selectedSize
                 }
-                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-[2em] py-[1.5em] rounded-xl transition-all duration-300 font-bold text-[1.1em] flex items-center justify-between shadow-lg hover:shadow-xl active:scale-98 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-orange-500 disabled:hover:to-orange-600 disabled:active:scale-100 group"
+                className="w-full bg-gradient-to-r from-primary to-orange-600 hover:from-orange-600 hover:to-primary text-white px-[2em] py-[1.5em] rounded-xl transition-all duration-300 font-bold text-[1.1em] flex items-center justify-between shadow-xl hover:shadow-2xl hover:scale-105 active:scale-98 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-primary disabled:hover:to-orange-600 disabled:active:scale-100 disabled:hover:scale-100 group"
               >
                 <div className="flex items-center gap-[0.75em]">
                   <ShoppingCart
@@ -198,7 +198,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
               </button>
             ) : (
               <div className="space-y-[1em]">
-                <div className="flex items-center justify-between bg-gray-100 dark:bg-gray-900 rounded-xl p-[1em]">
+                <div className="flex items-center justify-between glass-card rounded-xl p-[1em]">
                   <span className="text-[1em] font-semibold text-foreground">
                     Quantity
                   </span>
@@ -206,20 +206,20 @@ const ProductModal: React.FC<ProductModalProps> = ({
                     <button
                       onClick={decrementQuantity}
                       disabled={quantity <= 1}
-                      className="w-[2.5em] h-[2.5em] rounded-full bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 flex items-center justify-center transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                      className="w-[2.5em] h-[2.5em] rounded-full glass-button border-2 border-primary/30 hover:border-primary flex items-center justify-center transition-all active:scale-95 hover:scale-105 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
                       aria-label="Decrease quantity"
                     >
                       <Minus
-                        className="w-[1.25em] h-[1.25em] text-gray-700 dark:text-gray-300"
+                        className="w-[1.25em] h-[1.25em] text-foreground"
                         strokeWidth={2.5}
                       />
                     </button>
-                    <span className="text-[1.5em] font-bold text-foreground min-w-[2em] text-center">
+                    <span className="text-[1.5em] font-bold text-primary min-w-[2em] text-center drop-shadow-sm">
                       {quantity}
                     </span>
                     <button
                       onClick={incrementQuantity}
-                      className="w-[2.5em] h-[2.5em] rounded-full bg-orange-500 hover:bg-orange-600 flex items-center justify-center transition-all active:scale-95"
+                      className="w-[2.5em] h-[2.5em] rounded-full bg-gradient-to-br from-primary to-orange-600 hover:from-orange-600 hover:to-primary flex items-center justify-center transition-all active:scale-95 hover:scale-105 shadow-lg"
                       aria-label="Increase quantity"
                     >
                       <Plus
@@ -231,7 +231,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 </div>
                 <button
                   onClick={handleRemoveFromCart}
-                  className="w-full bg-red-500 hover:bg-red-600 text-white px-[2em] py-[1.25em] rounded-xl transition-all duration-300 font-semibold text-[1em] flex items-center justify-center gap-[0.75em] shadow-md hover:shadow-lg active:scale-98"
+                  className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-[2em] py-[1.25em] rounded-xl transition-all duration-300 font-semibold text-[1em] flex items-center justify-center gap-[0.75em] shadow-lg hover:shadow-xl hover:scale-105 active:scale-98"
                 >
                   <Trash2 className="w-[1.25em] h-[1.25em]" strokeWidth={2.5} />
                   <span>Remove from Cart</span>

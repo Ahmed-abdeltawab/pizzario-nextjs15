@@ -23,7 +23,13 @@ const BestSellers = ({ products }: BestSellersProps) => {
   };
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24">
+    <section className="py-16 sm:py-20 lg:py-24 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-orange-200/20 rounded-full blur-3xl"></div>
+      </div>
+      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <Heading />
@@ -39,9 +45,11 @@ const BestSellers = ({ products }: BestSellersProps) => {
               />
             ))
           ) : (
-            <p className="text-center col-span-full text-muted-foreground">
-              No best sellers available at the moment.
-            </p>
+            <div className="text-center col-span-full">
+              <p className="glass-card p-8 rounded-xl text-muted-foreground inline-block">
+                No best sellers available at the moment.
+              </p>
+            </div>
           )}
         </div>
 

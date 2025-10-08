@@ -26,7 +26,7 @@ const ExtrasSelector: React.FC<ExtrasSelectorProps> = ({
 
   return (
     <div className="space-y-[1em]" style={{ fontSize: "1rem" }}>
-      <h3 className="text-[1.2em] font-bold text-foreground">
+      <h3 className="text-[1.2em] font-bold text-foreground drop-shadow-sm">
         Add Extras
         <span className="text-[0.9em] font-normal text-muted-foreground ml-[0.5em]">
           (Optional)
@@ -40,10 +40,10 @@ const ExtrasSelector: React.FC<ExtrasSelectorProps> = ({
           return (
             <div
               key={extra.id}
-              className={`relative flex items-center space-x-[1em] px-[1.5em] py-[1.25em] rounded-xl border-2 transition-all duration-200 cursor-pointer ${
+              className={`relative flex items-center space-x-[1em] px-[1.5em] py-[1.25em] rounded-xl border-2 transition-all duration-300 cursor-pointer ${
                 isSelected
-                  ? "border-orange-500 bg-orange-50 dark:bg-orange-950/30"
-                  : "border-gray-300 dark:border-gray-700 bg-card hover:border-orange-300 dark:hover:border-orange-700"
+                  ? "border-primary glass-card shadow-lg scale-105"
+                  : "glass-button border-white/30 hover:border-primary/50 hover:scale-102"
               }`}
             >
               <Checkbox
@@ -52,13 +52,13 @@ const ExtrasSelector: React.FC<ExtrasSelectorProps> = ({
                 onCheckedChange={(checked) =>
                   handleExtraToggle(extra, checked as boolean)
                 }
-                className="data-[state=checked]:bg-orange-500 data-[state=checked]:border-orange-500"
+                className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
               />
               <Label
                 htmlFor={extra.id}
                 className={`flex-1 flex items-center justify-between cursor-pointer ${
                   isSelected
-                    ? "text-orange-600 dark:text-orange-400"
+                    ? "text-primary font-bold"
                     : "text-foreground"
                 }`}
               >

@@ -37,7 +37,12 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-background">
+    <section className="py-20 px-4 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+      </div>
+      
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -54,7 +59,7 @@ const Testimonials = () => {
           {testimonials.map((testimonial) => (
             <div 
               key={testimonial.id}
-              className="bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="glass-card rounded-xl p-6 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
               {/* Stars */}
               <div className="flex gap-1 mb-4">
@@ -68,7 +73,7 @@ const Testimonials = () => {
 
               {/* Customer Info */}
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-orange-200 rounded-full flex items-center justify-center text-2xl">
+                <div className="w-12 h-12 glass-button rounded-full flex items-center justify-center text-2xl shadow-md">
                   {testimonial.avatar}
                 </div>
                 <div>
@@ -85,17 +90,17 @@ const Testimonials = () => {
         </div>
 
         {/* Trust Indicators */}
-        <div className="mt-16 pt-8 border-t border-border">
+        <div className="mt-16 pt-8 border-t border-white/20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
+            <div className="glass-button p-4 rounded-xl">
               <div className="text-3xl font-bold text-primary mb-2">4.9/5</div>
               <div className="text-sm text-muted-foreground">Average Rating</div>
             </div>
-            <div>
+            <div className="glass-button p-4 rounded-xl">
               <div className="text-3xl font-bold text-primary mb-2">2000+</div>
               <div className="text-sm text-muted-foreground">Happy Customers</div>
             </div>
-            <div>
+            <div className="glass-button p-4 rounded-xl">
               <div className="text-3xl font-bold text-primary mb-2">30min</div>
               <div className="text-sm text-muted-foreground">Delivery Time</div>
             </div>

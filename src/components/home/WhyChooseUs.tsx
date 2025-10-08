@@ -25,11 +25,16 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-orange-50 to-primary/5">
+    <section className="py-20 px-4 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/4 right-0 w-64 h-64 bg-orange-200/30 rounded-full blur-3xl"></div>
+      </div>
+      
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content Side */}
-          <div>
+          <div className="glass-card p-8 rounded-2xl">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
               Why Choose Our Pizza?
             </h2>
@@ -41,7 +46,7 @@ const WhyChooseUs = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {features.map((feature, index) => (
-                <div key={index} className="flex items-start gap-4">
+                <div key={index} className="flex items-start gap-4 glass-button p-4 rounded-xl hover:scale-105 transition-all duration-300">
                   <div className="text-3xl flex-shrink-0">
                     {feature.icon}
                   </div>
@@ -60,10 +65,10 @@ const WhyChooseUs = () => {
 
           {/* Image Side */}
           <div className="relative">
-            <div className="bg-white rounded-2xl shadow-2xl p-8">
+            <div className="glass-card rounded-2xl shadow-2xl p-8">
               {/* Pizza Chef Illustration */}
               <div className="text-center mb-6">
-                <div className="text-8xl mb-4">👨‍🍳</div>
+                <div className="text-8xl mb-4 animate-bounce-slow">👨‍🍳</div>
                 <h3 className="text-xl font-bold text-foreground mb-2">
                   Made by Expert Chefs
                 </h3>
@@ -73,16 +78,16 @@ const WhyChooseUs = () => {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border">
-                <div className="text-center">
+              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20">
+                <div className="text-center glass-button p-3 rounded-lg">
                   <div className="text-2xl font-bold text-primary">20+</div>
                   <div className="text-xs text-muted-foreground">Years</div>
                 </div>
-                <div className="text-center">
+                <div className="text-center glass-button p-3 rounded-lg">
                   <div className="text-2xl font-bold text-primary">50k+</div>
                   <div className="text-xs text-muted-foreground">Happy Customers</div>
                 </div>
-                <div className="text-center">
+                <div className="text-center glass-button p-3 rounded-lg">
                   <div className="text-2xl font-bold text-primary">4.9</div>
                   <div className="text-xs text-muted-foreground">Rating</div>
                 </div>
@@ -90,10 +95,10 @@ const WhyChooseUs = () => {
             </div>
 
             {/* Floating Elements */}
-            <div className="absolute -top-4 -left-4 bg-primary text-primary-foreground p-4 rounded-full shadow-lg">
+            <div className="absolute -top-4 -left-4 glass-card p-4 rounded-full shadow-lg hover:scale-110 transition-transform duration-300">
               <span className="text-2xl">🏆</span>
             </div>
-            <div className="absolute -bottom-4 -right-4 bg-orange-500 text-white p-4 rounded-full shadow-lg">
+            <div className="absolute -bottom-4 -right-4 glass-card p-4 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-orange-400/30 to-orange-500/30">
               <span className="text-2xl">❤️</span>
             </div>
           </div>

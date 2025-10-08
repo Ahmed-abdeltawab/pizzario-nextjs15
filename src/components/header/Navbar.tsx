@@ -65,18 +65,18 @@ const Navbar = ({
             className={`
               relative px-2 md:px-3 lg:px-4 py-2 rounded-lg font-medium 
               text-sm md:text-base
-              transition-all duration-200 ease-in-out
+              transition-all duration-300 ease-in-out
               ${
                 isActive
-                  ? "text-primary bg-primary/10"
-                  : "text-foreground hover:text-primary hover:bg-accent/10"
+                  ? "text-primary glass-card shadow-md scale-105"
+                  : "text-foreground hover:text-primary hover:glass-button hover:scale-105"
               }
               ${isMobile ? "w-full text-left" : ""}
             `}
           >
             {link.name}
             {isActive && !isMobile && (
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full" />
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full shadow-lg shadow-primary/50" />
             )}
           </Link>
         );

@@ -20,7 +20,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
 }) => {
   return (
     <div className="space-y-[1em]" style={{ fontSize: "1rem" }}>
-      <h3 className="text-[1.2em] font-bold text-foreground">
+      <h3 className="text-[1.2em] font-bold text-foreground drop-shadow-sm">
         Select Size
         <span className="text-red-500 ml-[0.5em]">*</span>
       </h3>
@@ -40,22 +40,22 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
           return (
             <div
               key={size.id}
-              className={`relative flex items-center space-x-[1em] px-[1.5em] py-[1.25em] rounded-xl border-2 transition-all duration-200 cursor-pointer ${
+              className={`relative flex items-center space-x-[1em] px-[1.5em] py-[1.25em] rounded-xl border-2 transition-all duration-300 cursor-pointer ${
                 isSelected
-                  ? "border-orange-500 bg-orange-50 dark:bg-orange-950/30"
-                  : "border-gray-300 dark:border-gray-700 bg-card hover:border-orange-300 dark:hover:border-orange-700"
+                  ? "border-primary glass-card shadow-lg scale-105"
+                  : "glass-button border-white/30 hover:border-primary/50 hover:scale-102"
               }`}
             >
               <RadioGroupItem
                 value={size.id}
                 id={size.id}
-                className="data-[state=checked]:border-orange-500 data-[state=checked]:text-orange-500"
+                className="data-[state=checked]:border-primary data-[state=checked]:text-primary"
               />
               <Label
                 htmlFor={size.id}
                 className={`flex-1 flex items-center justify-between cursor-pointer ${
                   isSelected
-                    ? "text-orange-600 dark:text-orange-400"
+                    ? "text-primary font-bold"
                     : "text-foreground"
                 }`}
               >
@@ -70,7 +70,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
       </RadioGroup>
 
       {!selectedSize && (
-        <p className="text-[0.9em] text-red-500 mt-[0.5em]">
+        <p className="text-[0.9em] text-red-500 mt-[0.5em] glass-card p-2 rounded-lg">
           Please select a size
         </p>
       )}

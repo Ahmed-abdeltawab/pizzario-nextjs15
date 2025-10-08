@@ -12,26 +12,26 @@ const ProductComp = ({ product, index, handleAddToCart }: ProductProps) => {
   return (
     <div
       key={product.id}
-      className="group bg-card rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-border/50 hover:border-primary/20"
+      className="group glass-card rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:scale-105 hover:-translate-y-2"
     >
       {/* Image Container */}
-      <div className="relative bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 aspect-square overflow-hidden">
+      <div className="relative bg-gradient-to-br from-primary/10 via-orange-100/30 to-orange-200/30 dark:from-primary/20 dark:via-orange-950/40 dark:to-orange-900/30 aspect-square overflow-hidden">
         {/* Badge for top products */}
         {index < 3 && (
-          <div className="absolute top-3 left-3 z-20 bg-primary text-primary-foreground px-2.5 py-1 rounded-full text-xs font-bold shadow-lg">
+          <div className="absolute top-3 left-3 z-20 glass-card px-2.5 py-1 rounded-full text-xs font-bold shadow-lg border-2 border-primary/30 text-primary">
             #{index + 1} Popular
           </div>
         )}
 
         {/* Wishlist Button */}
-        <button className="absolute top-3 right-3 z-20 w-8 h-8 bg-white/90 dark:bg-black/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white dark:hover:bg-black transition-colors group/heart shadow-lg">
-          <Heart className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover/heart:text-red-500 transition-colors" />
+        <button className="absolute top-3 right-3 z-20 w-8 h-8 glass-button rounded-full flex items-center justify-center hover:scale-110 transition-all group/heart shadow-lg">
+          <Heart className="w-4 h-4 text-foreground group-hover/heart:text-red-500 group-hover/heart:fill-red-500 transition-all" />
         </button>
 
         {/* Product Image */}
         <div className="w-full h-full flex items-center justify-center p-6">
           {product.image.startsWith("http") || product.image.startsWith("/") ? (
-            <div className="relative w-full h-full rounded-xl overflow-hidden bg-white/80 dark:bg-white/90 shadow-inner">
+            <div className="relative w-full h-full rounded-xl overflow-hidden glass shadow-xl">
               <Image
                 src={product.image}
                 alt={product.name}
@@ -41,14 +41,14 @@ const ProductComp = ({ product, index, handleAddToCart }: ProductProps) => {
               />
             </div>
           ) : (
-            <span className="text-8xl sm:text-9xl group-hover:scale-110 transition-transform duration-500 filter drop-shadow-lg">
+            <span className="text-8xl sm:text-9xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 filter drop-shadow-2xl">
               {product.image}
             </span>
           )}
         </div>
 
         {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
       {/* Content */}
@@ -59,7 +59,7 @@ const ProductComp = ({ product, index, handleAddToCart }: ProductProps) => {
             <Star
               key={i}
               className={`w-4 h-4 ${
-                i < 4 ? "text-yellow-400 fill-current" : "text-gray-300"
+                i < 4 ? "text-yellow-400 fill-current drop-shadow-md" : "text-gray-300"
               }`}
             />
           ))}
@@ -69,7 +69,7 @@ const ProductComp = ({ product, index, handleAddToCart }: ProductProps) => {
         </div>
 
         {/* Product Name */}
-        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-1">
+        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-1 drop-shadow-sm">
           {product.name}
         </h3>
 
@@ -81,7 +81,7 @@ const ProductComp = ({ product, index, handleAddToCart }: ProductProps) => {
         {/* Price and Add to Cart */}
         <div className="flex items-center justify-between gap-3">
           <div className="flex flex-col">
-            <span className="text-2xl font-bold text-primary">
+            <span className="text-2xl font-bold text-primary drop-shadow-sm">
               ${product.price.toFixed(2)}
             </span>
           </div>

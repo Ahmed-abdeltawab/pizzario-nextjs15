@@ -8,10 +8,8 @@ import ThemeToggle from "./theme-toggle";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import {
-  getCurrentLocale,
   getLocaleFromPathname,
 } from "@/lib/getCurrentLocale";
-import path from "path";
 import { usePathname } from "next/navigation";
 
 const Header = ({
@@ -46,8 +44,8 @@ const Header = ({
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-shadow duration-200 ${
-        isScrolled ? "shadow-md" : ""
+      className={`sticky top-0 z-50 w-full glass-header transition-all duration-300 ${
+        isScrolled ? "shadow-lg" : "shadow-sm"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,10 +53,10 @@ const Header = ({
           {/* Logo */}
           <Link
             href={`/${locale}`}
-            className="logo flex items-center gap-2 flex-shrink-0"
+            className="logo flex items-center gap-2 flex-shrink-0 hover:scale-105 transition-transform duration-200"
           >
-            <span className="text-3xl sm:text-4xl">🍕</span>
-            <span className="text-xl sm:text-2xl font-bold text-primary">
+            <span className="text-3xl sm:text-4xl drop-shadow-lg">🍕</span>
+            <span className="text-xl sm:text-2xl font-bold text-primary drop-shadow-sm">
               Pizzario
             </span>
           </Link>
@@ -81,7 +79,7 @@ const Header = ({
               type="button"
               aria-label="Toggle menu"
               aria-expanded={isMobileMenuOpen}
-              className="p-2 rounded-lg hover:bg-accent/10 transition-colors"
+              className="glass-button p-2 rounded-lg transition-all duration-200 hover:scale-105"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
@@ -99,9 +97,9 @@ const Header = ({
             isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="py-4 space-y-4 border-t">
-            <Navbar isMobile onLinkClick={() => setIsMobileMenuOpen(false)} />
-            <div className="flex flex-col gap-3 pt-4 border-t">
+          <div className="py-4 space-y-4 glass-card rounded-lg mt-2 p-4">
+            <Navbar isMobile translations={translations} onLinkClick={() => setIsMobileMenuOpen(false)} />
+            <div className="flex flex-col gap-3 pt-4 border-t border-white/20">
               <ThemeToggle />
               <LangSwitcher />
               <LoginButton />
