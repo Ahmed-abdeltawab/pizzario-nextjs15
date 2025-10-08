@@ -167,6 +167,15 @@
     }
   }
   
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
   .animate-fadeIn {
     animation: fadeIn 0.3s ease-out;
   }
@@ -177,6 +186,10 @@
   
   .animate-bounce-slow {
     animation: bounce-slow 3s infinite;
+  }
+  
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
   }
   
   .active\:scale-98:active {

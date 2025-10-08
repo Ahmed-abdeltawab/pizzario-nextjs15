@@ -1,39 +1,45 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
+import { getDictionary } from "@/lib/getDictionary";
+import { getCurrentLocale } from "@/lib/getCurrentLocale";
 
-const HeroSection = () => {
+const HeroSection = async () => {
+  const locale = await getCurrentLocale();
+  console.log("Current Locale in HeroSection:", locale);
+  const dict = await getDictionary(locale);
   return (
     <section className="bg-gradient-to-br from-primary/5 to-orange-50 py-20 px-4">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         {/* Text Content */}
         <div className="space-y-6">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-            Delicious
-            <span className="text-primary block">Pizza</span>
-            Delivered Fresh
+            {dict.hero.title}
+            <span className="text-primary block">
+              {dict.hero.titleHighlight}
+            </span>
+            {dict.hero.titleEnd}
           </h1>
-          
+
           <p className="text-lg md:text-xl text-muted-foreground max-w-lg">
-            Experience the perfect blend of authentic Italian flavors with fresh ingredients. 
-            Made with love, delivered to your door in 30 minutes or less.
+            {dict.hero.description}
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link 
-              href="/menu" 
+            <Link
+              href={`/${locale}/menu`}
               className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors text-center"
             >
-              Order Now
+              {dict.hero.orderNow}
             </Link>
-            <Link 
-              href="/menu" 
+            <Link
+              href={`/${locale}/menu`}
               className="border-2 border-primary text-primary px-8 py-3 rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors text-center"
             >
-              View Menu
+              {dict.hero.viewMenu}
             </Link>
           </div>
         </div>
-        
+
         {/* Hero Image */}
         <div className="relative">
           <div className="relative bg-orange-100 rounded-full aspect-square max-w-lg mx-auto overflow-hidden">
@@ -45,7 +51,7 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Floating badges */}
           <div className="absolute top-4 right-4 bg-white rounded-lg px-4 py-2 shadow-lg">
             <div className="flex items-center gap-2">
@@ -56,7 +62,7 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="absolute bottom-8 left-4 bg-white rounded-lg px-4 py-2 shadow-lg">
             <div className="flex items-center gap-2">
               <span className="text-2xl">🚚</span>

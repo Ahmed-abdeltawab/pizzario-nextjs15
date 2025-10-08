@@ -8,10 +8,16 @@ import {
 import BestSellers from "@/components/home/BestSellers/BestSellers";
 
 import { getBestSellingProducts } from "@/server/db/products";
+import { getDictionary } from "@/lib/getDictionary";
+import { languagesType } from "@/i18n-config";
 
-export default async function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: languagesType }>;
+}) {
   const bestSellersProducts = await getBestSellingProducts(3);
-  console.log("Best Sellers Products:", bestSellersProducts);
+
   return (
     <main className="min-h-screen">
       <HeroSection />

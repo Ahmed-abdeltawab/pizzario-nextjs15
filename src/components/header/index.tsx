@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import LoginButton from "./login-button";
@@ -6,18 +6,30 @@ import LangSwitcher from "./lang-switcher";
 import CartButton from "./cart-button";
 import ThemeToggle from "./theme-toggle";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import {
+  getCurrentLocale,
+  getLocaleFromPathname,
+} from "@/lib/getCurrentLocale";
+import path from "path";
+import { usePathname } from "next/navigation";
 
-const Header = () => {
+const Header = ({
+  translations,
+}: {
+  translations: { [key: string]: string };
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Close mobile menu when window is resized to desktop
@@ -28,29 +40,32 @@ const Header = () => {
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <header 
+    <header
       className={`sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-shadow duration-200 ${
-        isScrolled ? 'shadow-md' : ''
+        isScrolled ? "shadow-md" : ""
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 sm:h-20 items-center justify-between gap-2 md:gap-4">
           {/* Logo */}
-          <div className="logo flex items-center gap-2 flex-shrink-0">
+          <Link
+            href={`/${locale}`}
+            className="logo flex items-center gap-2 flex-shrink-0"
+          >
             <span className="text-3xl sm:text-4xl">🍕</span>
             <span className="text-xl sm:text-2xl font-bold text-primary">
               Pizzario
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-2 md:gap-3 lg:gap-8 flex-1 justify-end">
-            <Navbar />
+            <Navbar translations={translations} />
             <div className="flex items-center gap-1.5 md:gap-2 lg:gap-4 flex-shrink-0">
               <ThemeToggle />
               <LangSwitcher />
@@ -81,7 +96,7 @@ const Header = () => {
         {/* Mobile Navigation Menu */}
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+            isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
           <div className="py-4 space-y-4 border-t">

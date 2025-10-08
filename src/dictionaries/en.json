@@ -1,0 +1,109 @@
+{
+  
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "about": "About",
+    "contact": "Contact",
+    "cart": "Cart",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile"
+  },
+  "hero": {
+    "title": "Delicious",
+    "titleHighlight": "Pizza",
+    "titleEnd": "Delivered Fresh",
+    "description": "Experience the perfect blend of authentic Italian flavors with fresh ingredients. Made with love, delivered to your door in 30 minutes or less.",
+    "orderNow": "Order Now",
+    "viewMenu": "View Menu"
+  },
+  "bestSellers": {
+    "title": "Best Sellers",
+    "subtitle": "Our most popular pizzas",
+    "addToCart": "Add to Cart",
+    "viewDetails": "View Details"
+  },
+  "whyChooseUs": {
+    "title": "Why Choose Us",
+    "subtitle": "We deliver excellence in every slice",
+    "freshIngredients": {
+      "title": "Fresh Ingredients",
+      "description": "We use only the finest and freshest ingredients"
+    },
+    "fastDelivery": {
+      "title": "Fast Delivery",
+      "description": "30 minutes or less, guaranteed"
+    },
+    "bestPrice": {
+      "title": "Best Price",
+      "description": "Quality food at affordable prices"
+    }
+  },
+  "testimonials": {
+    "title": "What Our Customers Say",
+    "subtitle": "Don't just take our word for it"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with us",
+    "location": "Location",
+    "phone": "Phone",
+    "email": "Email",
+    "hours": "Hours"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continueShopping": "Continue Shopping",
+    "remove": "Remove",
+    "quantity": "Quantity",
+    "clear": "Clear Cart"
+  },
+  "product": {
+    "size": "Size",
+    "extras": "Extras",
+    "price": "Price",
+    "addToCart": "Add to Cart",
+    "selectSize": "Select Size",
+    "selectExtras": "Select Extras"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?"
+  },
+  "notFound": {
+    "title": "Oops! Pizza Not Found",
+    "description": "Looks like this page got delivered to the wrong address. Don't worry, we've got plenty of other delicious options waiting for you!",
+    "suggestions": "Here's what you can do:",
+    "goHome": "Go back to the homepage",
+    "browseMenu": "Browse our delicious menu",
+    "checkCart": "Check your cart",
+    "needHelp": "Need help? Contact us",
+    "backHome": "Back to Home",
+    "viewMenu": "View Menu",
+    "funFact": "Fun Fact: The first pizza delivery was made in 1889 to Queen Margherita of Italy!"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "tryAgain": "Try Again",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "close": "Close"
+  }
+}

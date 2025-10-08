@@ -1,65 +1,77 @@
-'use client'
+"use client";
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { Routes } from "@/constants/enums";
-
-const links = [
-  {
-    id: crypto.randomUUID(),
-    name: "Home",
-    path: Routes.ROOT,
-  },
-  {
-    id: crypto.randomUUID(),
-    name: "Menu",
-    path: Routes.MENU,
-  },
-  {
-    id: crypto.randomUUID(),
-    name: "About",
-    path: Routes.ABOUT,
-  },
-  {
-    id: crypto.randomUUID(),
-    name: "Contact",
-    path: Routes.CONTACT,
-  },
-];
+import { languagesType } from "@/i18n-config";
 
 interface NavbarProps {
   isMobile?: boolean;
   onLinkClick?: () => void;
+  translations?: { [key: string]: string };
 }
 
-const Navbar = ({ isMobile = false, onLinkClick }: NavbarProps) => {
+const Navbar = ({
+  isMobile = false,
+  onLinkClick,
+  translations,
+}: NavbarProps) => {
   const pathname = usePathname() ?? "/";
+  const { locale } = useParams() as { locale: languagesType };
 
+  const links = [
+    {
+      name: translations?.home,
+      path: Routes.ROOT,
+    },
+    {
+      name: translations?.menu,
+      path: Routes.MENU,
+    },
+    {
+      name: translations?.about,
+      path: Routes.ABOUT,
+    },
+    {
+      name: translations?.contact,
+      path: Routes.CONTACT,
+    },
+  ];
   return (
     <nav
       aria-label="Main navigation"
-      className={isMobile ? "flex flex-col gap-1" : "flex flex-row items-center gap-0.5 md:gap-1 lg:gap-2"}
+      className={
+        isMobile
+          ? "flex flex-col gap-1"
+          : "flex flex-row items-center gap-0.5 md:gap-1 lg:gap-2"
+      }
     >
       {links.map((link) => {
-        const isActive =
-          pathname === link.path ||
-          (link.path !== "/" && pathname.startsWith(link.path));
+        // Construct the full path with locale
+        const fullPath = link.path === Routes.ROOT 
+          ? `/${locale}` 
+          : `/${locale}/${link.path}`;
+        
+        // Check if current path is active
+        const isActive = pathname === fullPath || 
+          (link.path !== Routes.ROOT && pathname.startsWith(fullPath));
 
         return (
           <Link
-            key={link.id}
-            href={link.path}
+            key={link.path}
+            href={fullPath}
             aria-current={isActive ? "page" : undefined}
             onClick={onLinkClick}
             className={`
               relative px-2 md:px-3 lg:px-4 py-2 rounded-lg font-medium 
               text-sm md:text-base
               transition-all duration-200 ease-in-out
-              ${isActive 
-                ? 'text-primary bg-primary/10' 
-                : 'text-foreground hover:text-primary hover:bg-accent/10'
+              ${
+                isActive
+                  ? "text-primary bg-primary/10"
+                  : "text-foreground hover:text-primary hover:bg-accent/10"
               }
-              ${isMobile ? 'w-full text-left' : ''}
+              ${isMobile ? "w-full text-left" : ""}
             `}
           >
             {link.name}

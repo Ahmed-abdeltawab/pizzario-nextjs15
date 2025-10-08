@@ -1,6 +1,8 @@
 'use client'
 import { Globe } from "lucide-react";
 import React, { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { i18n } from "@/i18n-config";
 
 const languages = [
   { code: 'en', name: 'English', nativeName: 'English' },
@@ -8,10 +10,26 @@ const languages = [
 ];
 
 const LangSwitcher = () => {
-  const [currentLang, setCurrentLang] = useState('en');
+  const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
-  const currentLanguage = languages.find(lang => lang.code === currentLang);
+  // Extract current locale from pathname
+  const currentLocale = i18n.locales.find(locale => pathname.startsWith(`/${locale}`)) || i18n.defaultLocale;
+  const currentLanguage = languages.find(lang => lang.code === currentLocale);
+
+  const switchLocale = (newLocale: string) => {
+    if (!pathname) return;
+    
+    // Remove current locale from pathname
+    const pathWithoutLocale = pathname.replace(`/${currentLocale}`, '') || '/';
+    
+    // Add new locale to pathname
+    const newPath = `/${newLocale}${pathWithoutLocale}`;
+    
+    router.push(newPath);
+    setIsOpen(false);
+  };
 
   return (
     <div className="relative">
@@ -50,13 +68,10 @@ const LangSwitcher = () => {
             {languages.map((lang) => (
               <button
                 key={lang.code}
-                onClick={() => {
-                  setCurrentLang(lang.code);
-                  setIsOpen(false);
-                }}
+                onClick={() => switchLocale(lang.code)}
                 className={`w-full px-4 py-2.5 text-left text-sm
                   hover:bg-accent/50 transition-colors
-                  ${currentLang === lang.code ? 'bg-accent/30 font-medium text-primary' : ''}
+                  ${currentLocale === lang.code ? 'bg-accent/30 font-medium text-primary' : ''}
                 `}
               >
                 <span className="block">{lang.nativeName}</span>
