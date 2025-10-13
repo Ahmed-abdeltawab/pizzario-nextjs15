@@ -9,7 +9,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import {
   getLocaleFromPathname,
-} from "@/lib/getCurrentLocale";
+} from "@/lib/getLocaleFromPathname";
 import { usePathname } from "next/navigation";
 
 const Header = ({

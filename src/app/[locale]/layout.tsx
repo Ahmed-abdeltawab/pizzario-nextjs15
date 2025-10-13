@@ -1,13 +1,12 @@
 import "./globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/contexts/theme-provider";
-import ReduxProvider from "@/providers/ReduxProvider";
 import { Roboto } from "next/font/google";
 import { Directions, Languages } from "@/constants/enums";
 import { i18n, type Locale } from "@/i18n-config";
 import { Metadata } from "next";
 import { getDictionary } from "@/lib/getDictionary";
-
+import ReduxProvider from "@/providers/ReduxProvider";
 const roboto = Roboto({
   subsets: ["latin"],
   preload: true,

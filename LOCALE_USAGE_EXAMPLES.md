@@ -48,7 +48,7 @@ const MyComponent = async () => {
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { getLocaleFromPathname } from "@/lib/getCurrentLocale";
+import { getLocaleFromPathname } from "@/lib/getLocaleFromPathname";
 
 const ClientComponent = () => {
   const pathname = usePathname();
