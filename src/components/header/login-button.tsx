@@ -3,10 +3,14 @@ import { LogIn } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-const LoginButton = () => {
+interface LoginButtonProps {
+  locale?: string;
+}
+
+const LoginButton = ({ locale = "en" }: LoginButtonProps) => {
   return (
     <Link
-      href={`${Routes.AUTH}/${Pages.LOGIN}`}
+      href={`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`}
       className="inline-flex items-center gap-1.5 md:gap-2 
         px-4 md:px-5 lg:px-6 py-2 md:py-2.5
         bg-primary text-primary-foreground font-medium rounded-full

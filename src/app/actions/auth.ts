@@ -1,51 +1,88 @@
-// actions/auth.ts
-"use server"; // <-- مهم جداً لتعريفها كـ Server Action
+"use server";
 
 import prisma from "@/lib/prisma";
+import { registerSchema } from "@/validation/auth";
 import bcrypt from "bcryptjs";
+import { z } from "zod";
 
-// الحالة المبدئية اللي هترجع للفورم
-type FormState = {
-  success: boolean;
-  message: string;
-};
+// Validation schema for user registration
+
 
 export async function registerUser(
-  previousState: FormState, // الحالة السابقة للفورم
-  formData: FormData // البيانات اللي جاية من الفورم
-): Promise<FormState> {
-  const fullName = formData.get("fullName") as string;
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-
-  console.log("Registering user:",  fullName, email );
-  if (!fullName || !email || !password) {
-    return { success: false, message: "please fill in all fields." };
-  }
-
+  prevState: { success: boolean; message: string },
+  formData: FormData
+) {
   try {
-    const existingUser = await prisma.user.findUnique({ where: { email } });
-    if (existingUser) {
-      return { success: false, message: "This email is already registered." };
+    // Extract form data with type safety
+    const fullName = formData.get("fullName");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const confirmPassword = formData.get("confirmPassword");
+
+    // Ensure all fields are strings
+    if (
+      typeof fullName !== "string" ||
+      typeof email !== "string" ||
+      typeof password !== "string" ||
+      typeof confirmPassword !== "string"
+    ) {
+      return {
+        success: false,
+        message: "Invalid form data.",
+      };
     }
 
+    const rawData = {
+      fullName,
+      email,
+      password,
+      confirmPassword,
+    };
+
+    // Validate input
+    const validationResult = registerSchema.safeParse(rawData);
+
+    if (!validationResult.success) {
+      // Return the first validation error
+      return {
+        success: false,
+        message: validationResult.error.issues[0].message,
+      };
+    }
+
+    // Data is already validated and available in rawData
+    // Check if user already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return {
+        success: false,
+        message: "Email already in use.",
+      };
+    }
+
+    // Hash password and create user
     const hashedPassword = await bcrypt.hash(password, 12);
 
     await prisma.user.create({
       data: {
-        fullName,
+        name: fullName,
         email,
         password: hashedPassword,
       },
     });
 
-    // 5. إرجاع رسالة نجاح
     return {
       success: true,
-      message: "تم إنشاء حسابك بنجاح! يمكنك الآن تسجيل الدخول.",
+      message: "Account created successfully! Redirecting...",
     };
   } catch (error) {
-    console.error("REGISTRATION_ERROR:", error);
-    return { success: false, message: "حدث خطأ ما، يرجى المحاولة مرة أخرى." };
+    console.error("REGISTER_ERROR:", error);
+    return {
+      success: false,
+      message: "Something went wrong. Please try again.",
+    };
   }
 }

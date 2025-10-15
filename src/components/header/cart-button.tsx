@@ -1,3 +1,4 @@
+'use client';
 import { useAppSelector } from "@/redux/hooks";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";

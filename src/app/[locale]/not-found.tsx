@@ -24,7 +24,7 @@ export default async function NotFound({
           >
             404
           </h1>
-          
+
           {/* Animated Pizza Icon */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="relative animate-bounce">
@@ -69,7 +69,7 @@ export default async function NotFound({
             <li className="flex items-start gap-[0.8em]">
               <span className="text-[1.5em] mt-[-0.2em]">🏠</span>
               <span className="text-muted-foreground">
-                {dict.notFound.goHome.split(' ').slice(0, -1).join(' ')}{" "}
+                {dict.notFound.goHome.split(" ").slice(0, -1).join(" ")}{" "}
                 <Link
                   href={`/${params.locale}`}
                   className="text-primary hover:underline font-medium"
@@ -81,7 +81,7 @@ export default async function NotFound({
             <li className="flex items-start gap-[0.8em]">
               <span className="text-[1.5em] mt-[-0.2em]">🍕</span>
               <span className="text-muted-foreground">
-                {dict.notFound.browseMenu.split(' ').slice(0, -2).join(' ')}{" "}
+                {dict.notFound.browseMenu.split(" ").slice(0, -2).join(" ")}{" "}
                 <Link
                   href={`/${params.locale}/menu`}
                   className="text-primary hover:underline font-medium"
@@ -93,7 +93,7 @@ export default async function NotFound({
             <li className="flex items-start gap-[0.8em]">
               <span className="text-[1.5em] mt-[-0.2em]">🛒</span>
               <span className="text-muted-foreground">
-                {dict.notFound.checkCart.split(' ').slice(0, -1).join(' ')}{" "}
+                {dict.notFound.checkCart.split(" ").slice(0, -1).join(" ")}{" "}
                 <Link
                   href={`/${params.locale}/cart`}
                   className="text-primary hover:underline font-medium"
@@ -105,7 +105,7 @@ export default async function NotFound({
             <li className="flex items-start gap-[0.8em]">
               <span className="text-[1.5em] mt-[-0.2em]">📞</span>
               <span className="text-muted-foreground">
-                {dict.notFound.needHelp.split(' ').slice(0, -2).join(' ')}{" "}
+                {dict.notFound.needHelp.split(" ").slice(0, -2).join(" ")}{" "}
                 <Link
                   href={`/${params.locale}/contact`}
                   className="text-primary hover:underline font-medium"
@@ -126,7 +126,9 @@ export default async function NotFound({
             <Link href={`/${params.locale}`}>{dict.notFound.backHome}</Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="min-w-[12em]">
-            <Link href={`/${params.locale}/menu`}>{dict.notFound.viewMenu}</Link>
+            <Link href={`/${params.locale}/menu`}>
+              {dict.notFound.viewMenu}
+            </Link>
           </Button>
         </div>
 

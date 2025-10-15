@@ -1,8 +1,9 @@
 "use client";
 
 import { Locale } from "@/i18n-config";
-import { signIn } from "@/server/auth";
+// import { signIn } from "@/server/auth";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 import { FormEvent, useState } from "react";
 import { Label } from "../ui/label";
@@ -29,14 +30,14 @@ const SignInForm = ({ locale, dict }: { locale: Locale; dict: any }) => {
       setIsLoading(false);
       return;
     }
-
+    console.log("Signing in with:", { email, password, rememberMe });
     try {
       const res = await signIn("credentials", {
         redirect: false, // Don't redirect automatically, we'll handle it manually
         email,
         password,
       });
-
+      console.log("Sign in response:", res);
       if (res?.error) {
         setError(
           res.error === "CredentialsSignin"

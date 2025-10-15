@@ -1,14 +1,30 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { registerUser } from "@/app/actions/auth";
+import { useFormStatus } from "react-dom";
 
 const initialState = { success: false, message: "" };
+
+// Submit button component to access form status
+function SubmitButton({ label }: { label: string }) {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button
+      type="submit"
+      disabled={pending}
+      className="w-full h-[2.75em] text-[1em] font-semibold bg-primary hover:bg-primary/90 transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      {pending ? "Creating account..." : label}
+    </Button>
+  );
+}
 
 interface SignUpFormProps {
   locale: string;
@@ -28,10 +44,14 @@ interface SignUpFormProps {
 export function SignUpForm({ locale, dict }: SignUpFormProps) {
   const [state, formAction] = useActionState(registerUser, initialState);
   const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
 
   // Redirect to sign-in page after successful registration
   useEffect(() => {
     if (state.success) {
+      // Clear form only on success
+      formRef.current?.reset();
+      
       // Wait 2 seconds to show success message, then redirect
       const timer = setTimeout(() => {
         router.push(`/${locale}/auth/signin`);
@@ -43,7 +63,11 @@ export function SignUpForm({ locale, dict }: SignUpFormProps) {
 
   return (
     <>
-      <form className="space-y-[1.25em]" action={formAction}>
+      <form
+        ref={formRef}
+        className="space-y-[1.25em]"
+        action={formAction}
+      >
         {/* Full Name Field */}
         <div className="space-y-[0.5em]">
           <Label htmlFor="fullName" className="text-[0.9em] font-medium">
@@ -116,12 +140,7 @@ export function SignUpForm({ locale, dict }: SignUpFormProps) {
         </div>
 
         {/* Sign Up Button */}
-        <Button
-          type="submit"
-          className="w-full h-[2.75em] text-[1em] font-semibold bg-primary hover:bg-primary/90 transition-all shadow-md hover:shadow-lg"
-        >
-          {dict.auth.signUp}
-        </Button>
+        <SubmitButton label={dict.auth.signUp} />
 
         {/* Success/Error Message */}
         {state.message && (

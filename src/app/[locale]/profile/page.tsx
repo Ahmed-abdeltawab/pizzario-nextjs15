@@ -10,6 +10,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/server/auth";
+import { redirect } from "next/navigation";
 
 export default async function ProfilePage({
   params,
@@ -18,11 +21,11 @@ export default async function ProfilePage({
 }) {
   const { locale } = await params;
   const dict = await getDictionary(locale);
-
+  const session = await getServerSession(authOptions);
   // Mock user data for design purposes
   const mockUser = {
-    fullName: "John Doe",
-    email: "john.doe@example.com",
+    fullName: session?.user.name,
+    email: session?.user.email,
     phone: "+1 (555) 123-4567",
     address: "123 Pizza Street, Food City, FC 12345",
     memberSince: "January 2024",
@@ -31,7 +34,10 @@ export default async function ProfilePage({
     favoriteItems: 5,
     totalSpent: "$1,234.56",
   };
-
+  console.log("Session in profile page:", session);
+  if (!session) {
+    redirect(`/${locale}/auth/signin`);
+  }
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5 py-[2rem] px-[1rem]">
       <div className="max-w-[75rem] mx-auto">

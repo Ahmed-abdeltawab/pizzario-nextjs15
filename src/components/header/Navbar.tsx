@@ -48,12 +48,12 @@ const Navbar = ({
     >
       {links.map((link) => {
         // Construct the full path with locale
-        const fullPath = link.path === Routes.ROOT 
-          ? `/${locale}` 
-          : `/${locale}/${link.path}`;
-        
+        const fullPath =
+          link.path === Routes.ROOT ? `/${locale}` : `/${locale}/${link.path}`;
+
         // Check if current path is active
-        const isActive = pathname === fullPath || 
+        const isActive =
+          pathname === fullPath ||
           (link.path !== Routes.ROOT && pathname.startsWith(fullPath));
 
         return (

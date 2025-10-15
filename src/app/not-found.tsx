@@ -145,34 +145,6 @@ export default function NotFound() {
               </p>
             </div>
           </div>
-
-          {/* Floating Pizza Slices Decoration */}
-          <div className="fixed inset-0 pointer-events-none overflow-hidden">
-            <div
-              className="absolute top-[10%] left-[10%] text-[3em] opacity-10 animate-spin-slow"
-              style={{ fontSize: "3em", animationDuration: "20s" }}
-            >
-              🍕
-            </div>
-            <div
-              className="absolute top-[20%] right-[15%] text-[2em] opacity-10 animate-bounce"
-              style={{ fontSize: "2em", animationDelay: "1s" }}
-            >
-              🍕
-            </div>
-            <div
-              className="absolute bottom-[15%] left-[15%] text-[2.5em] opacity-10 animate-pulse"
-              style={{ fontSize: "2.5em", animationDelay: "2s" }}
-            >
-              🍕
-            </div>
-            <div
-              className="absolute bottom-[20%] right-[10%] text-[3.5em] opacity-10 animate-spin-slow"
-              style={{ fontSize: "3.5em", animationDuration: "25s" }}
-            >
-              🍕
-            </div>
-          </div>
         </div>
       </body>
     </html>
