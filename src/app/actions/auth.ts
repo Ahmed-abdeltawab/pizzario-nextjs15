@@ -3,10 +3,6 @@
 import prisma from "@/lib/prisma";
 import { registerSchema } from "@/validation/auth";
 import bcrypt from "bcryptjs";
-import { z } from "zod";
-
-// Validation schema for user registration
-
 
 export async function registerUser(
   prevState: { success: boolean; message: string },

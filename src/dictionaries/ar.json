@@ -91,6 +91,10 @@
     "orContinueWith": "أو تابع مع",
     "rememberMe": "تذكرني",
     "termsAgree": "أوافق على الشروط والأحكام",
+    "city": "المدينة",
+    "streetAddress": "عنوان الشارع",
+    "postalCode": "الرمز البريدي",
+    "country": "البلد",
     "profile": {
       "title": "ملفي الشخصي",
       "subtitle": "إدارة معلومات حسابك",

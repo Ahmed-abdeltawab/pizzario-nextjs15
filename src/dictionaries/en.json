@@ -94,6 +94,10 @@
     "orContinueWith": "Or continue with",
     "rememberMe": "Remember me",
     "termsAgree": "I agree to the Terms & Conditions",
+    "city": "City",
+    "streetAddress": "Street Address",
+    "postalCode": "Postal Code",
+    "country": "Country",
     "profile": {
       "title": "My Profile",
       "subtitle": "Manage your account information",

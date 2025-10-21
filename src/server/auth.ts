@@ -3,15 +3,12 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import prisma from "@/lib/prisma";
 import { loginSchema } from "@/validation/auth";
-import { PrismaAdapter } from "@auth/prisma-adapter";
 
 export const authOptions: NextAuthOptions = {
-  // Remove PrismaAdapter when using JWT strategy with Credentials provider
-  adapter: PrismaAdapter(prisma),
+  // Using JWT strategy with Credentials provider - no adapter needed
   providers: [
     CredentialsProvider({
       name: "Credentials",
-
       credentials: {
         email: {
           label: "Email",
@@ -47,10 +44,11 @@ export const authOptions: NextAuthOptions = {
 
           // Return user object with all necessary fields
           return {
-            id: user.id.toString(),
+            id: user.id,
             name: user.name || "",
             email: user.email || "",
-            // role: user.role || "USER",
+            role: user.role || "USER",
+            image: user.image || null,
           };
         } catch (error) {
           console.error("Authorization error:", error);
@@ -76,13 +74,17 @@ export const authOptions: NextAuthOptions = {
 
         if (dbUser) {
           token.id = dbUser.id;
-          token.name = dbUser.name ?? (typeof token.name === "string" ? token.name : "");
-          token.email = dbUser.email ?? (typeof token.email === "string" ? token.email : "");
-          token.role = (dbUser as any).role || token.role || "USER";
-          token.image = dbUser.image ?? null;
-          token.emailVerified = dbUser.emailVerified ?? null;
-          token.createdAt = (dbUser as any).createdAt?.toISOString() ?? token.createdAt;
-          token.updatedAt = (dbUser as any).updatedAt?.toISOString() ?? token.updatedAt;
+          token.name = dbUser.name;
+          token.email = dbUser.email;
+          token.role = dbUser.role;
+          token.image = dbUser.image;
+          token.phone = dbUser.phone;
+          token.streetAddress = dbUser.streetAddress;
+          token.postalCode = dbUser.postalCode;
+          token.city = dbUser.city;
+          token.country = dbUser.country;
+          token.createdAt = dbUser.createdAt.toISOString();
+          token.updatedAt = dbUser.updatedAt.toISOString();
         }
       }
 
@@ -93,25 +95,37 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (dbUser) {
-          token.name = dbUser.name ?? (typeof token.name === "string" ? token.name : "");
-          token.email = dbUser.email ?? (typeof token.email === "string" ? token.email : "");
-          token.role = (dbUser as any).role || token.role || "USER";
-          token.image = dbUser.image ?? null;
-          token.emailVerified = dbUser.emailVerified ?? null;
-          token.updatedAt = (dbUser as any).updatedAt?.toISOString() ?? token.updatedAt;
+          token.name = dbUser.name;
+          token.email = dbUser.email;
+          token.role = dbUser.role;
+          token.image = dbUser.image;
+          token.phone = dbUser.phone;
+          token.streetAddress = dbUser.streetAddress;
+          token.postalCode = dbUser.postalCode;
+          token.city = dbUser.city;
+          token.country = dbUser.country;
+          token.updatedAt = dbUser.updatedAt.toISOString();
+          token.createdAt = dbUser.createdAt.toISOString();
         }
       }
 
       return token;
     },
     async session({ session, token }) {
-      // Add user info to session from token
+      // Add all user info to session from token
       if (session.user && token) {
-        session.user.id = token.id as string;
-        session.user.role = token.role as any;
-        session.user.name = typeof token.name === "string" ? token.name : session.user.name;
-        session.user.email = typeof token.email === "string" ? token.email : session.user.email;
-        session.user.image = (token.image as string | null) ?? session.user.image;
+        session.user.id = token.id;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.role = token.role;
+        session.user.image = token.image;
+        session.user.phone = token.phone;
+        session.user.streetAddress = token.streetAddress;
+        session.user.postalCode = token.postalCode;
+        session.user.city = token.city;
+        session.user.country = token.country;
+        session.user.createdAt = token.createdAt;
+        session.user.updatedAt = token.updatedAt;
       }
       return session;
     },
